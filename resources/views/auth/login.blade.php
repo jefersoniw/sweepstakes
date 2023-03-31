@@ -1,24 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-</head>
-<body>
-  <form action="{{ route('login') }}" method="post">
-    @csrf
+@extends('auth.base')
 
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" name="email" id="email" placeholder="Seu Email">
+@section('content')
+
+<form action="{{ route('login') }}" method="post" >
+@csrf
+
+@error('email')
+    <div class="bg-white border border-solid text-primary-dark p-4 rounded mb-4">
+      {{ $message }}
     </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" class="form-control" name="password" id="password">
+@enderror
+
+<div class="flex flex-col">
+    <label for="email" class="block text-sm font-medium text-white">Email</label>
+    <div class="mt-1">
+      <input type="email" name="email" id="email" class="email p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="Seu Email" required>
     </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-  </form>
-</body>
-</html>
+</div>
+
+<div class="flex flex-col mt-4">
+    <label for="password" class="block text-sm font-medium text-white">Senha</label>
+    <div class="mt-1">
+      <input type="password" class="password p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" id="password" name="password" placeholder="Sua Senha" required>
+    </div>
+</div>
+
+<button class="p-2 bg-white text-black w-full rounded-lg mt-4">Entrar</button>
+
+</form>
+
+@endsection
